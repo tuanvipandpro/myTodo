@@ -1,0 +1,15 @@
+.d-flex {
+    display: flex;
+}
+
+.center {
+    justify-content: center;
+}
+
+.it-center{
+    align-items: center;
+}
+
+.mg-t {
+    margin-top: 10px;
+}
