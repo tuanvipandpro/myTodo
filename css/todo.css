@@ -1,0 +1,89 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;  
+}
+
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background: black;    
+}
+
+.todo-container {  
+    position: relative;
+    background: azure;
+    width: 60vw;
+}
+
+.todo-container h1 {
+    background: cornflowerblue;
+    color: beige;
+    padding: 10px 20px;
+}
+
+.todo-container ul {
+    position: relative;
+    padding: 20px;
+}
+
+.todo-container ul li {
+    position: relative;
+    list-style: none;
+    padding: 15px 0;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.todo-container ul li:last-child {
+    border-bottom: none;
+}
+
+.todo-container ul li label {
+    position: relative;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    cursor: pointer;
+}
+
+.todo-container ul li label input {
+    visibility: hidden;
+    appearance: none;
+}
+
+.todo-container ul li label input:checked ~ p {
+    text-decoration: line-through;
+    color: #ccc;
+}
+
+.todo-container ul li label input:checked ~ span {
+    background: #03a9f4;
+}
+
+.todo-container ul li label p {
+    position: absolute;
+}
+
+.todo-container ul li label span {
+    position: relative;
+    width: 20px;
+    height: 20px;
+    border: 1px solid #ccc;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;    
+}
+
+.todo-container ul li label span::before {
+    content: '';
+    position: absolute;
+    top: 5px;
+    width: 10px;
+    height: 5px;
+    border-left: 2px solid #ccc;
+    border-bottom: 2px solid #ccc;
+    transform: rotate(-40deg);
+}
