@@ -7,11 +7,91 @@
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,500;0,562;0,600;0,700;1,400;1,500;1,562;1,600;1,700&display=swap">
     <link rel="icon" href="img/icon/favicon.ico"/>
     <link rel="stylesheet" href="css/todo.css"/>
+    <link rel="stylesheet" href="css/modal.css"/>
+    <style>
+        .onTop {
+            position: absolute;
+            bottom: 1%;
+            right: 1%;
+        }
+    </style>
 </head>
 <body>
+    <!-- Modal Box -->
+    <div id="myModal" class="modal">
+        <div class="modal-content">
+            <!-- <span class="close">&times;</span> -->
+            <p id="p-modal-content">Some text in the Modal..</p>
+        </div>        
+    </div>
+    <!-- Todo List -->
     <div class="todo-container"> 
+        <input onchange="changeDate()" type="date" id="date"/>
         <h1>To-Do List</h1>
-        <ul>
+        <ul id="todo">         
+            <li>
+                <label>
+                    <input type="checkbox" name="" />
+                    <p>AAA</p>
+                    <span></span>
+                </label>
+            </li>
+            <li>
+                <label>
+                    <input type="checkbox" name="" />
+                    <p>AAA</p>
+                    <span></span>
+                </label>
+            </li>
+            <li>
+                <label>
+                    <input type="checkbox" name="" />
+                    <p>AAA</p>
+                    <span></span>
+                </label>
+            </li>
+            <li>
+                <label>
+                    <input type="checkbox" name="" />
+                    <p>AAA</p>
+                    <span></span>
+                </label>
+            </li>
+            <li>
+                <label>
+                    <input type="checkbox" name="" />
+                    <p>AAA</p>
+                    <span></span>
+                </label>
+            </li>
+            <li>
+                <label>
+                    <input type="checkbox" name="" />
+                    <p>AAA</p>
+                    <span></span>
+                </label>
+            </li>
+            <li>
+                <label>
+                    <input type="checkbox" name="" />
+                    <p>AAA</p>
+                    <span></span>
+                </label>
+            </li>
+            <li>
+                <label>
+                    <input type="checkbox" name="" />
+                    <p>AAA</p>
+                    <span></span>
+                </label>
+            </li>
+            <li>
+                <label>
+                    <input type="checkbox" name="" />
+                    <p>AAA</p>
+                    <span></span>
+                </label>
+            </li>
             <li>
                 <label>
                     <input type="checkbox" name="" />
@@ -34,6 +114,61 @@
                 </label>
             </li>
         </ul>
+        <button onclick="addTodo()">Add</button>
     </div>
+    <!-- On Top Button -->
+    <div class="onTop">
+        <button>Top</button>
+    </div>
+    <script>
+        function addTodo() {
+            // GET DOM
+            let todo = document.getElementById('todo')
+            // Create DOM
+            let li = document.createElement('li')
+
+            let label = document.createElement('label')
+
+            let input = document.createElement('input')
+            input.type = "checkbox"
+            input.name = ""
+
+            let p = document.createElement('p')
+            p.appendChild(document.createTextNode('Node add by JS'))
+
+            let span = document.createElement('span')
+
+            label.appendChild(input)
+            label.appendChild(p)
+            label.appendChild(span)
+
+            li.appendChild(label)
+
+            todo.appendChild(li)
+
+            console.log(li)
+        }
+
+        function changeDate() {
+            let date = document.getElementById('date').value
+            console.log(date)
+
+            let modal = document.getElementById("myModal");
+            modal.style.display = "block";
+            
+            let p = document.getElementById('p-modal-content')
+            p.innerText = date
+            
+            // let span = document.getElementsByClassName("close")[0];
+            // span.onclick = function() {
+            //     modal.style.display = "none";
+            // } 
+
+            window.onclick = () => modal.style.display = "none" 
+
+
+        }
+    
+    </script>
 </body>
 </html>
