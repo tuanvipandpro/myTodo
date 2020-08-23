@@ -23,126 +23,69 @@
     <div class="todo-container"> 
         <input onchange="changeDate()" type="date" id="date"/>
         <h1>To-Do List</h1>
-        <ul id="todo">         
-            <li>
-                <label>
-                    <input type="checkbox" name="" />
-                    <p>AAA</p>
-                    <span></span>
-                </label>
-            </li>
-            <li>
-                <label>
-                    <input type="checkbox" name="" />
-                    <p>AAA</p>
-                    <span></span>
-                </label>
-            </li>
-            <li>
-                <label>
-                    <input type="checkbox" name="" />
-                    <p>AAA</p>
-                    <span></span>
-                </label>
-            </li>
-            <li>
-                <label>
-                    <input type="checkbox" name="" />
-                    <p>AAA</p>
-                    <span></span>
-                </label>
-            </li>
-            <li>
-                <label>
-                    <input type="checkbox" name="" />
-                    <p>AAA</p>
-                    <span></span>
-                </label>
-            </li>
-            <li>
-                <label>
-                    <input type="checkbox" name="" />
-                    <p>AAA</p>
-                    <span></span>
-                </label>
-            </li>
-            <li>
-                <label>
-                    <input type="checkbox" name="" />
-                    <p>AAA</p>
-                    <span></span>
-                </label>
-            </li>
-            <li>
-                <label>
-                    <input type="checkbox" name="" />
-                    <p>AAA</p>
-                    <span></span>
-                </label>
-            </li>
-            <li>
-                <label>
-                    <input type="checkbox" name="" />
-                    <p>AAA</p>
-                    <span></span>
-                </label>
-            </li>
-            <li>
-                <label>
-                    <input type="checkbox" name="" />
-                    <p>AAA</p>
-                    <span></span>
-                </label>
-            </li>
-            <li>
-                <label>
-                    <input type="checkbox" name="" />
-                    <p>AAA</p>
-                    <span></span>
-                </label>
-            </li>
-            <li>
-                <label>
-                    <input type="checkbox" name="" />
-                    <p>AAA</p>
-                    <span></span>
-                </label>
-            </li>
+        <ul id="todo">  
+            <div class="todo-add">
+                <li>
+                    <label>
+                        <input onblur="addTodo()" class="todo-add" type="text" name="" id="todo-add-task"/>
+                        <p>New Task</p>
+                        <div style="width: 20px; height: 20px;"></div>
+                    </label>
+                </li> 
+            </div>  
+            <div class="todo-task">
+                <li>
+                    <label>
+                        <input type="checkbox" name="" />
+                        <p>AAA</p>
+                        <span></span>
+                    </label>
+                </li>                     
+            </div>                                       
         </ul>
-        <button onclick="addTodo()">Add</button>
+        <!-- <button onclick="addTodo()">Add</button> -->
     </div>
     <!-- On Top Button -->
-    <section>
-        
-    </section>
     <a href="#" class="goToTop"><i class="fas fa-arrow-up"></i></a>
     <script>
         function addTodo() {
-            // GET DOM
-            let todo = document.getElementById('todo')
-            // Create DOM
-            let li = document.createElement('li')
+            let newTask = document.getElementById('todo-add-task').value
+            document.getElementById('todo-add-task').value = ''
 
-            let label = document.createElement('label')
+            let firstTask = document.querySelector('.todo-task')
 
-            let input = document.createElement('input')
-            input.type = "checkbox"
-            input.name = ""
+            if (typeof newTask === 'string' && newTask.trim() !== '') {
+                // GET DOM
+                let todo = document.getElementById('todo')
+                // Create DOM
+                let div = document.createElement('div')
+                div.classList.add("todo-task")
+                let li = document.createElement('li')
 
-            let p = document.createElement('p')
-            p.appendChild(document.createTextNode('Node add by JS'))
+                let label = document.createElement('label')
 
-            let span = document.createElement('span')
+                let input = document.createElement('input')
+                input.type = "checkbox"
+                input.name = ""
 
-            label.appendChild(input)
-            label.appendChild(p)
-            label.appendChild(span)
+                let p = document.createElement('p')
+                p.appendChild(document.createTextNode(newTask))
 
-            li.appendChild(label)
+                let span = document.createElement('span')
 
-            todo.appendChild(li)
+                label.appendChild(input)
+                label.appendChild(p)
+                label.appendChild(span)
 
-            console.log(li)
+                li.appendChild(label)
+
+                div.appendChild(li)
+
+                todo.appendChild(div)
+                
+                todo.insertBefore(div, firstTask)
+            }
+            // console.log(todo.firstElementChild)
         }
 
         function changeDate() {

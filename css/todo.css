@@ -48,17 +48,37 @@ body {
     cursor: pointer;
 }
 
-.todo-container ul li label input {
+.todo-container ul .todo-add li label input {
+    background: none;
+    border: none;
+    outline: none;
+}
+
+.todo-container ul .todo-task li label input {
     visibility: hidden;
     appearance: none;
 }
 
-.todo-container ul li label input:checked ~ p {
+/* New Task */
+
+.todo-container ul .todo-add li label input:focus ~ p {
+    visibility: hidden;
+    appearance: none;
+    /* text-decoration: line-through;
+    color: #ccc; */
+}
+
+/* .todo-container ul .todo-task li label input:checked ~ span {
+    background: #03a9f4;
+} */
+
+/* Task */
+.todo-container ul .todo-task li label input:checked ~ p {
     text-decoration: line-through;
     color: #ccc;
 }
 
-.todo-container ul li label input:checked ~ span {
+.todo-container ul .todo-task li label input:checked ~ span {
     background: #03a9f4;
 }
 
