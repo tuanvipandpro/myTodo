@@ -9,24 +9,56 @@ body {
     justify-content: center;
     align-items: center;
     min-height: 100vh;
-    background: black;    
+    /* background: black;     */
 }
 
 .todo-container {  
     position: relative;
-    background: azure;
-    width: 60vw;
+    width: 100%;
+    height: 100%;
 }
 
-.todo-container h1 {
-    background: cornflowerblue;
-    color: beige;
-    padding: 10px 20px;
+.time-pick {
+    display: flex;
+    width: 100%;
+    background: #74b9ff;
+    box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+.time-pick h1 {
+    padding: 5px 15px;
+}
+
+.time-pick input[type=date] {
+    /* height: 7vh; */
+    /* width: 50%; */
+    margin-top: 2px;
+    margin-left: 10px;
+    font-size: 4vh;
+    font-weight: 500;
+    background: none;
+    border: none;
+    outline: none;
+}
+
+.total-task {
+   width: 50%;
+}
+
+.total-task label {
+    padding-top: 10px;
+    font-size: 4vh;
+    float: right;
 }
 
 .todo-container ul {
     position: relative;
     padding: 20px;
+}
+
+.label-add-todo {
+    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+    padding-bottom: 1vh;
 }
 
 .todo-container ul li {
