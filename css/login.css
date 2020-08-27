@@ -1,6 +1,6 @@
 body {
     font-family: 'Lora', serif;
-    background: aliceblue;
+    background: #a9d8fa;
     font-size: 4vmin;
     height: 100vh;
     margin: 0;
@@ -9,9 +9,10 @@ body {
 }
 
 .login-container {
-    background: white;
+    background: #ecf0f1;
     border-radius: 10px;
     width: 30vw;
+    box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
 
 .login-container h1 {
