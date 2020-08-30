@@ -24,4 +24,9 @@ public class PageController {
 	public String registerPage() {
 		return "register";
 	}
+	
+	@RequestMapping(value = "/403")
+	public String deniedPage() {
+		return "403";
+	}
 }

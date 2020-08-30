@@ -3,8 +3,6 @@
  */
 package tuanlm.fpt.web.todo.config;
 
-import javax.sql.DataSource;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -13,7 +11,7 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.security.web.authentication.rememberme.JdbcTokenRepositoryImpl;
+import org.springframework.security.web.authentication.rememberme.InMemoryTokenRepositoryImpl;
 import org.springframework.security.web.authentication.rememberme.PersistentTokenRepository;
 
 import tuanlm.fpt.web.todo.service.UserDetailsServiceImpl;
@@ -26,8 +24,8 @@ import tuanlm.fpt.web.todo.service.UserDetailsServiceImpl;
 @Configuration
 @EnableWebSecurity
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
-	@Autowired
-	private DataSource dataSource;
+//	@Autowired
+//	private DataSource dataSource;
 	@Autowired
 	private UserDetailsServiceImpl userDetailsServiceImpl;
 	
@@ -38,9 +36,10 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	
 	@Bean
 	public PersistentTokenRepository persistentTokenRepository() {
-		JdbcTokenRepositoryImpl db = new JdbcTokenRepositoryImpl();
-		db.setDataSource(dataSource);
-		return db;
+//		JdbcTokenRepositoryImpl db = new JdbcTokenRepositoryImpl();
+//		db.setDataSource(dataSource);
+//		return db;
+		return new InMemoryTokenRepositoryImpl();
 	}
 	
 	public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
@@ -53,29 +52,25 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 		
 		http.authorizeRequests().antMatchers("/", "/login", "logout").permitAll();
 		
-        // Trang /userInfo yêu cầu phải login với vai trò ROLE_USER hoặc ROLE_ADMIN.
-        // Nếu chưa login, nó sẽ redirect tới loginPage
-//        http.authorizeRequests().antMatchers("/home").access("hasAnyRole('MEMBER', 'ADMIN')");
+		http.authorizeRequests().antMatchers("/home").access("hasRole('MEMBER')");
+		
+		http.authorizeRequests().antMatchers("/admin").access("hasRole('ADMIN')");
+		
+		http.authorizeRequests().and().exceptionHandling().accessDeniedPage("/403");
  
-        // Trang chỉ dành cho ADMIN
-//        http.authorizeRequests().antMatchers("/admin").access("hasRole('ADMIN')");
- 
-        // Khi người dùng đã login, với vai trò XX.
-        // Nhưng truy cập vào trang yêu cầu vai trò YY,
-        // Ngoại lệ AccessDeniedException sẽ ném ra.
-        http.authorizeRequests().and().exceptionHandling().accessDeniedPage("/403");
- 
-        // Cấu hình cho Login Form.
-        http.authorizeRequests().and().formLogin()
-                // Submit URL của trang login
-                .loginProcessingUrl("/login") // Submit URL
-                .loginPage("/welcome")//
+        http.authorizeRequests()
+        		.and()
+        		.formLogin()
+                .loginProcessingUrl("/login")
+                .loginPage("/")//
                 .defaultSuccessUrl("/home")
                 .failureUrl("/welcome?error=true")
                 .usernameParameter("username")
                 .passwordParameter("password")
-                // Cấu hình cho Logout Page.
-                .and().logout().logoutUrl("/logout").logoutSuccessUrl("/logoutSuccessful");
+                .and()
+                .logout()
+                .logoutUrl("/logout")
+                .logoutSuccessUrl("/logoutSuccessful");
 
         // Cấu hình Remember Me.
 //        http.authorizeRequests().and() //
