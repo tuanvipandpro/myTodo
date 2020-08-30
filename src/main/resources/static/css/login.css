@@ -118,3 +118,10 @@ input[type="submit"]:hover {
 .login-resgister-link a:hover {
     text-decoration: underline;
 }
+
+.rememberMe {
+	margin: -5px 0 20px 5px;
+    color: #a6a6a6;
+    cursor: pointer;
+    font-size: 2.5vh;
+}
