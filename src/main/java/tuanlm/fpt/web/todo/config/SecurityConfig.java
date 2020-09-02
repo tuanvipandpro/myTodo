@@ -49,7 +49,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
-		http.csrf().disable();
+		http.cors().and().csrf().disable();
 		// Page For All
 		http.authorizeRequests().antMatchers("/", "/login", "logout").permitAll();
 		// Login with ROLE_MEMBER
