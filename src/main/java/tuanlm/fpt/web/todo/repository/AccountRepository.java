@@ -15,5 +15,12 @@ import tuanlm.fpt.web.todo.entity.Account;
 
 @Repository
 public interface AccountRepository extends JpaRepository<Account, String> {
+	
+	/**
+	 * Find by username.
+	 *
+	 * @param username the username
+	 * @return the account
+	 */
 	Account findByUsername(String username);
 }

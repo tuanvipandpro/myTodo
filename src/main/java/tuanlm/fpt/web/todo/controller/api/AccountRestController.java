@@ -34,7 +34,11 @@ public class AccountRestController {
 	
 	@PostMapping(value = "/register-account", produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<Void> registerAccount(@RequestBody @Valid Account account) {
-		service.registerAccount(account);
-		return new ResponseEntity<Void>(HttpStatus.OK);
+		if (service.registerAccount(account)) {
+			return new ResponseEntity<Void>(HttpStatus.OK);
+		} else {
+			return new ResponseEntity<Void>(HttpStatus.INTERNAL_SERVER_ERROR);
+		}
+		
 	}
 }

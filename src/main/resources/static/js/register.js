@@ -18,9 +18,10 @@ function checkRegis() {
 		
 		axios.post('/account/register-account', params).then(res => {
 			console.log(res)
+			window.location.replace("http://localhost:8084")
 		}).catch(e => {
-			alert('Request Fail')
 			console.log(e)
+			alert('Some information is not correct ! Please check again !')
 		})
 		
 		return false
