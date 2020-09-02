@@ -14,4 +14,12 @@ public interface AccountService {
 	 * @return boolean
 	 */
 	boolean registerAccount(Account account);
+	
+	/**
+	 * Check exist account.
+	 *
+	 * @param username the username
+	 * @return the string
+	 */
+	String checkExistAccount(String username);
 }

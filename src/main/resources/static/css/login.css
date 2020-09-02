@@ -79,11 +79,11 @@ form .login-input {
     color: #a6a6a6;
     cursor: pointer;
     font-size: 2.5vh;
+    text-decoration: none;
 }
 
 .forget:hover {
     text-decoration: underline;
-
 }
 
 input[type="submit"] {

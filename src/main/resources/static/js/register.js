@@ -9,6 +9,8 @@ function checkRegis() {
 		alert("Your information is not correct! Please check again !")
 		return false;
 	} else {
+		let url = '/account/register-account'
+
 		let params = {
 			username: username,
 			password: password,
@@ -16,7 +18,7 @@ function checkRegis() {
 			email: email
 		}
 		
-		axios.post('/account/register-account', params).then(res => {
+		axios.post(url, params).then(res => {
 			console.log(res)
 			window.location.replace("http://localhost:8084")
 		}).catch(e => {
