@@ -20,7 +20,6 @@ import org.springframework.web.bind.annotation.RestController;
 import tuanlm.fpt.web.todo.entity.Account;
 import tuanlm.fpt.web.todo.service.AccountService;
 
-// TODO: Auto-generated Javadoc
 /**
  * The Class AccountRestController.
  *
@@ -51,7 +50,12 @@ public class AccountRestController {
 	 */
 	@GetMapping(value = "/check-exist-account", produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<String> checkExistAccount(@RequestParam @NotBlank(message = "Username is empty !") String username) {
-		return new ResponseEntity<String>(service.checkExistAccount(username), HttpStatus.OK);
+		String verifyCode = service.checkExistAccount(username);
+		if (verifyCode != null) {
+			return new ResponseEntity<String>(verifyCode, HttpStatus.OK);
+		} else {
+			return new ResponseEntity<String>(verifyCode, HttpStatus.INTERNAL_SERVER_ERROR);
+		}
 	}
 	
 	/**
