@@ -20,6 +20,7 @@ import org.springframework.web.bind.annotation.RestController;
 import tuanlm.fpt.web.todo.entity.Account;
 import tuanlm.fpt.web.todo.service.AccountService;
 
+// TODO: Auto-generated Javadoc
 /**
  * The Class AccountRestController.
  *
@@ -55,6 +56,23 @@ public class AccountRestController {
 			return new ResponseEntity<String>(verifyCode, HttpStatus.OK);
 		} else {
 			return new ResponseEntity<String>(verifyCode, HttpStatus.INTERNAL_SERVER_ERROR);
+		}
+	}
+	
+	/**
+	 * Reset password.
+	 *
+	 * @param password the password
+	 * @return the response entity
+	 */
+	@GetMapping(value = "/reset-password", produces = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<Void> resetPassword(
+			@RequestParam @NotBlank(message = "Username is empty !") String username,
+			@RequestParam @NotBlank(message = "Password is empty !") String password) {
+		if (service.resetPassword(username, password)) {
+			return new ResponseEntity<Void>(HttpStatus.OK);
+		} else {
+			return new ResponseEntity<Void>(HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 	}
 	

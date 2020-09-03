@@ -81,10 +81,23 @@ public class AccountServiceImp implements AccountService {
 			return null;
 		} else {
 			int randomCode = MathUtils.getRandomInteger();
-			MailUtils.sendTextMail(sender, account.getEmail(), "myTodo | Forget Password", randomCode + "");
+			MailUtils.sendTextMail(sender, account.getEmail(), "myTodo | Forget Password","Your verify code : " + randomCode);
 			return randomCode + "";
 		}
 		
+	}
+
+	@Override
+	public boolean resetPassword(String username, String password) {
+		Account account = accountRepository.findByUsername(username);
+		
+		if (account == null) {
+			return false;
+		} else {
+			account.setPassword(encoder.encode(password));
+			accountRepository.save(account);
+			return true;
+		}
 	}
 
 }
