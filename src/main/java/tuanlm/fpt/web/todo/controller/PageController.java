@@ -1,7 +1,11 @@
 package tuanlm.fpt.web.todo.controller;
 
+import javax.validation.constraints.NotBlank;
+
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 /**
  * The Class PageController.
@@ -58,6 +62,12 @@ public class PageController {
 	 */
 	@RequestMapping(value = "/forget")
 	public String forgetPage() {
+		return "forget";
+	}
+	
+	@RequestMapping(value = "/reset")
+	public String resetPage(@RequestParam @NotBlank(message = "Username is empty !")  String username, Model model) {
+		model.addAttribute("username", username);
 		return "forget";
 	}
 }

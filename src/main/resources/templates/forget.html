@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -14,16 +14,31 @@
 </head>
 <body>
     <div class="login-container d-center">
-        <h1 style="font-size: 5vmin;">Forget Password ?</h1>
-		<form>
-		    <div class="login-input">
-                <input type="text" name="username" id="username" required/>
-                <label>Username</label>
-            </div>                      
-            <div class="login-submit-button" style="margin-bottom: 6vh;">
-                <input type="submit" onclick="return checkAccount()" value="Forget"/>
-            </div>  
-		</form> 
+        <div class="forget-box" th:unless="${username != null}">
+            <h1 style="font-size: 5vmin;">Forget Password ?</h1>
+            <form action="/reset" id="forgetForm">
+                <div class="login-input">
+                    <input type="text" name="username" id="username" required/>
+                    <label>Username</label>
+                </div>                      
+                <div class="login-submit-button" style="margin-bottom: 6vh;">
+                    <input type="submit" onclick="return checkAccount()" value="Forget"/>
+                </div>  
+            </form>
+        </div>
+        <div class="password-box" th:if="${username != null}">
+            <h1 style="font-size: 5vmin;">New Password ?</h1>
+            <form>
+                <input type="hidden" name="username" id="username" th:value="${username}"/>
+                <div class="login-input">
+                    <input type="password" name="password" id="password" required/>
+                    <label>New Password</label>
+                </div>                                      
+                <div class="login-submit-button" style="margin-bottom: 6vh;">
+                    <input type="submit" onclick="return resetPassword()" value="Forget"/>
+                </div>  
+            </form>
+        </div>
     </div>
 </body>
 </html>
