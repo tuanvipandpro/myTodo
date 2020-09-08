@@ -3,6 +3,8 @@ package tuanlm.fpt.web.todo.service;
 import java.util.Date;
 import java.util.List;
 
+import org.springframework.stereotype.Service;
+
 import tuanlm.fpt.web.todo.entity.Task;
 import tuanlm.fpt.web.todo.repository.TaskRepository;
 import tuanlm.fpt.web.todo.utils.AppConstants;
@@ -11,6 +13,7 @@ import tuanlm.fpt.web.todo.utils.AppConstants;
 /**
  * The Class TaskServiceImp.
  */
+@Service
 public class TaskServiceImp implements TaskService {
 	
 	/** The task repository. */

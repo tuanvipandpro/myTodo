@@ -1,11 +1,16 @@
 package tuanlm.fpt.web.todo.controller;
 
+import java.security.Principal;
+import java.util.Date;
+
 import javax.validation.constraints.NotBlank;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+
+import tuanlm.fpt.web.todo.service.TaskService;
 
 /**
  * The Class PageController.
@@ -14,6 +19,11 @@ import org.springframework.web.bind.annotation.RequestParam;
  */
 @Controller
 public class PageController {
+	private TaskService taskService;
+	
+	public PageController(TaskService taskService) {
+		this.taskService = taskService;
+	}
 	
 	/**
 	 * Welcome page.
@@ -31,8 +41,8 @@ public class PageController {
 	 * @return the string
 	 */
 	@RequestMapping(value = "/home")
-	public String homePage() {
-		
+	public String homePage(Model model, Principal principal) {
+		model.addAttribute("taskTodayList", taskService.getTaskByUsernameAndDate(principal.getName(), new Date()));
 		return "home";
 	}
 	
