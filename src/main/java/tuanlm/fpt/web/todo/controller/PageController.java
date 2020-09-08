@@ -32,6 +32,7 @@ public class PageController {
 	 */
 	@RequestMapping(value = "/home")
 	public String homePage() {
+		
 		return "home";
 	}
 	

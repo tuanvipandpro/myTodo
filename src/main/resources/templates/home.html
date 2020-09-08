@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html>
-<head>
+<head xmlns:th="http://www.thymeleaf.org">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>myTodo</title>
@@ -30,7 +30,7 @@
                 <a class="menu-btn" href="#menu-item-1"><i class="far fa-user"></i> Menu</a>
                 <div class="menu-sub-item">
                     <a href="#">My Task</a>
-                    <a href="#">Password</a>
+                    <!-- <a href="#">Password</a> -->
                 </div>
             </li>
             <li class="menu-item" id="menu-item-2">
@@ -61,6 +61,7 @@
                         <li>
                             <label>
                                 <input onchange="callModal()" type="checkbox" name="" />
+                                <input type="hidden" name="id" value="1"/>
                                 <p>Task 1</p>
                                 <span></span>
                             </label>

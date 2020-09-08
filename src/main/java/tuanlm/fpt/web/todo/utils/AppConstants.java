@@ -8,4 +8,8 @@ public class AppConstants {
 	
 	// Status
 	public static final int ACTIVE_STATUS = 1;
+	public static final int IN_ACTIVE_STATUS = 2;
+	public static final int DELETED_STATUS = 3;
+	public static final int OPEN_STATUS = 4;
+	public static final int DONE_STATUS = 5;
 }
