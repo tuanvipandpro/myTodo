@@ -51,14 +51,14 @@ public class TaskServiceImp implements TaskService {
 	}
 	
 	/**
-	 * Done task.
+	 * Update task.
 	 *
 	 * @param id the id
 	 * @return true, if successful
 	 */
-	public boolean doneTask(int id) {
+	public boolean updateTask(int id, int status) {
 		Task task = taskRepository.findById(id);
-		task.setStatusId(AppConstants.DONE_STATUS);
+		task.setStatusId(status);
 		return (taskRepository.save(task) != null);
 	}
 }

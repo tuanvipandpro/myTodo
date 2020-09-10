@@ -34,5 +34,5 @@ public interface TaskService {
 	 * @param id the id
 	 * @return true, if successful
 	 */
-	boolean doneTask(int id);
+	boolean updateTask(int id, int status);
 }

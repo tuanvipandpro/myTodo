@@ -13,8 +13,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.validation.constraints.NotBlank;
 
-// TODO: Auto-generated Javadoc
 /**
  * The Class Task.
  *
@@ -33,10 +33,12 @@ public class Task implements Serializable {
 	private int id;
 	
 	/** The username. */
+	@NotBlank(message = "Username is empty !")
 	@Column(name = "username", nullable = false, length = 50)
 	private String username;
 	
 	/** The content. */
+	@NotBlank(message = "Content is empty !")
 	@Column(name = "content", nullable = false, length = 500)
 	private String content;
 	

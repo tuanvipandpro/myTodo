@@ -57,25 +57,23 @@
                             </label>
                         </li>
                     </div>
-                    <div class="todo-task">
-                        <li>
-                            <label>
-                                <input onchange="callModal()" type="checkbox" name="" />
-                                <input type="hidden" name="id" value="1"/>
-                                <p>Task 1</p>
-                                <span></span>
-                            </label>
-                        </li>
-                    </div>
-                    <div class="todo-task">
-                        <li>
-                            <label>
-                                <input onchange="callModal()" type="checkbox" name="" />
-                                <p>Task 1</p>
-                                <span></span>
-                            </label>
-                        </li>
-                    </div>
+                    <th:block th:each="task : ${taskTodayList}">
+	                    <div class="todo-task">
+	                        <li>
+	                            <label>
+	                            	<th:block th:if="${task.statusId == 4}">
+	                            		<input onchange="callModal()" type="checkbox" name="status"/>
+	                            	</th:block>
+	                            	<th:block th:if="${task.statusId == 5}">
+	                            		<input onchange="callModal()" type="checkbox" name="status" checked="checked"/>
+	                            	</th:block>	                                
+		                                <input type="hidden" name="id" value="${task.id}"/>
+		                                <p th:text="${task.content}">Task</p>
+	                                <span></span>
+	                            </label>
+	                        </li>
+	                    </div>                    
+                    </th:block>
                 </ul>
             </div>
         </div>
