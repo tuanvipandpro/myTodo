@@ -2,6 +2,7 @@ package tuanlm.fpt.web.todo.controller.api;
 
 
 import java.security.Principal;
+import java.text.ParseException;
 import java.util.Date;
 import java.util.List;
 
@@ -41,14 +42,25 @@ public class TaskRestController {
 		this.taskService = taskService;
 	}
 	
-//	@GetMapping(value = "get-list-task-by-day", produces = MediaType.APPLICATION_JSON_VALUE)
-//	public ResponseEntity<List<Task>> getTaskListByDate(@RequestParam String date, Principal principal) {
-//		if (principal == null) {
-//			return new ResponseEntity<List<Task>>(HttpStatus.FORBIDDEN);
-//		}	
-//		
-//		return new ResponseEntity<List<Task>>(taskService.getTaskByUsernameAndDate(principal.getName(), date), HttpStatus.OK);
-//	}
+	@GetMapping(value = "get-list-task-by-day", produces = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<List<Task>> getTaskListByDate(@RequestParam String date, Principal principal) {
+		if (principal == null) {
+			return new ResponseEntity<List<Task>>(HttpStatus.FORBIDDEN);
+		}	
+		
+		try {
+			Date dateConverted = DateUtils.DateConvert(date, "yyyy-MM-dd");
+			if (dateConverted != null) {
+				return new ResponseEntity<List<Task>>(taskService.getTaskByUsernameAndDate(principal.getName(), dateConverted), HttpStatus.OK);
+			} 
+			else {
+				return new ResponseEntity<List<Task>>(HttpStatus.INTERNAL_SERVER_ERROR);
+			}
+		} 
+		catch (ParseException e) {
+			return new ResponseEntity<List<Task>>(HttpStatus.INTERNAL_SERVER_ERROR);
+		}
+	}
 	
 	/**
 	 * Creates the task.

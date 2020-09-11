@@ -57,23 +57,25 @@
                             </label>
                         </li>
                     </div>
-                    <th:block th:each="task : ${taskTodayList}">
-	                    <div class="todo-task">
-	                        <li>
-	                            <label>
-	                            	<th:block th:if="${task.statusId == 4}">
-	                            		<input onchange="callModal()" type="checkbox" name="status"/>
-	                            	</th:block>
-	                            	<th:block th:if="${task.statusId == 5}">
-	                            		<input onchange="callModal()" type="checkbox" name="status" checked="checked"/>
-	                            	</th:block>	                                
-		                                <input type="hidden" name="id" value="${task.id}"/>
-		                                <p th:text="${task.content}">Task</p>
-	                                <span></span>
-	                            </label>
-	                        </li>
-	                    </div>                    
-                    </th:block>
+                    <div id="todo-wrapper">
+                        <th:block th:each="task : ${taskTodayList}">
+                            <div class="todo-task">
+                                <li>
+                                    <label>
+                                        <th:block th:if="${task.statusId == 4}">
+                                            <input onchange="updateTask()" type="checkbox" name="status"/>
+                                        </th:block>
+                                        <th:block th:if="${task.statusId == 5}">
+                                            <input onchange="updateTask()" type="checkbox" name="status" checked="checked"/>
+                                        </th:block>	                                
+                                            <input type="hidden" name="id" value="${task.id}"/>
+                                            <p th:text="${task.content}">Task</p>
+                                        <span></span>
+                                    </label>
+                                </li>
+                            </div>                    
+                        </th:block>
+                    </div>
                 </ul>
             </div>
         </div>
