@@ -60,15 +60,15 @@
                     <div id="todo-wrapper">
                         <th:block th:each="task : ${taskTodayList}">
                             <div class="todo-task">
-                                <li>
+                                <li th:id="${task.id}">
                                     <label>
                                         <th:block th:if="${task.statusId == 4}">
-                                            <input onchange="updateTask()" type="checkbox" name="status"/>
+                                            <input th:onclick="updateTask('${task}');" type="checkbox" name="status"/>
                                         </th:block>
                                         <th:block th:if="${task.statusId == 5}">
-                                            <input onchange="updateTask()" type="checkbox" name="status" checked="checked"/>
+                                            <input th:onclick="updateTask('${task}');" type="checkbox" name="status" checked="checked"/>
                                         </th:block>	                                
-                                            <input type="hidden" name="id" value="${task.id}"/>
+                                            <input type="hidden" name="id" th:value="${task.id}"/>
                                             <p th:text="${task.content}">Task</p>
                                         <span></span>
                                     </label>

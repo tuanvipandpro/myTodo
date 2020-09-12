@@ -102,8 +102,8 @@ function changeDate() {
     }).catch(e => console.error(e))
 }
 
-function updateTask() {
-    console.error("update")
+function updateTask(task) {
+    console.error("update", task)
 }
 
 /**
