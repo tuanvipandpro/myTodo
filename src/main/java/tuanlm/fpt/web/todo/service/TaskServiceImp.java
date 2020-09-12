@@ -1,5 +1,6 @@
 package tuanlm.fpt.web.todo.service;
 
+import java.text.ParseException;
 import java.util.Date;
 import java.util.List;
 
@@ -7,7 +8,9 @@ import org.springframework.stereotype.Service;
 
 import tuanlm.fpt.web.todo.entity.Task;
 import tuanlm.fpt.web.todo.repository.TaskRepository;
+import tuanlm.fpt.web.todo.request.TaskRequest;
 import tuanlm.fpt.web.todo.utils.AppConstants;
+import tuanlm.fpt.web.todo.utils.DateUtils;
 
 // TODO: Auto-generated Javadoc
 /**
@@ -39,21 +42,35 @@ public class TaskServiceImp implements TaskService {
 		return taskRepository.findByUsernameAndDate(username, date);
 	}
 	
+
 	/**
 	 * Adds the task.
 	 *
 	 * @param username the username
-	 * @param content the content
-	 * @return the integer
+	 * @param task the task
+	 * @return the task
 	 */
-	public Integer addTask(String username, String content) {
-		return taskRepository.save(new Task(username, content, new Date(), AppConstants.OPEN_STATUS)).getId();
+	public Task addTask(String username, TaskRequest taskRequest) {
+		Task task = new Task();
+		task.setUsername(username);
+		task.setContent(taskRequest.getContent());
+		task.setStatusId(AppConstants.OPEN_STATUS);
+		
+		try {
+			task.setDate(DateUtils.DateConvert(taskRequest.getDate(), "yyyy-MM-dd"));
+		}
+		catch(ParseException e) {
+			task.setDate(new Date());
+		}
+
+		return taskRepository.save(task);
 	}
 	
 	/**
 	 * Update task.
 	 *
 	 * @param id the id
+	 * @param status the status
 	 * @return true, if successful
 	 */
 	public boolean updateTask(int id, int status) {

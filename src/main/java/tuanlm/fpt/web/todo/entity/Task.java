@@ -33,7 +33,6 @@ public class Task implements Serializable {
 	private int id;
 	
 	/** The username. */
-	@NotBlank(message = "Username is empty !")
 	@Column(name = "username", nullable = false, length = 50)
 	private String username;
 	
@@ -74,13 +73,6 @@ public class Task implements Serializable {
 	 */
 	public int getId() {
 		return id;
-	}
-
-	/**
-	 * @param id the id to set
-	 */
-	public void setId(int id) {
-		this.id = id;
 	}
 
 	/**

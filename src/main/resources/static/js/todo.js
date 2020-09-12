@@ -15,15 +15,19 @@ function addTodo() {
     let newTask = document.getElementById('todo-add-task').value
     document.getElementById('todo-add-task').value = ''
 
-    let task = {
-        id: 1,
-        content: 'ABC',
-        username: 'leminhtuan',
-        date: '2020-09-09',
-        statusId: 5
+    if (newTask.trim() !== '') {
+        callModal()
+        let url = '/task-service/create-new-task'
+        let params = {
+            content: newTask,
+            date: document.getElementById('date').value
+        }
+    
+        axios.post(url, params).then(res => {
+            addDomTask(res.data)
+            hideModal()
+        }).catch(e => console.error(e))
     }
-
-    addDomTask(task)
 }
 
 /**
@@ -32,25 +36,22 @@ function addTodo() {
 function addDomTask(task) {
     if (typeof task.content === 'string' && task.content.trim() !== '') {
         // GET DOM
-        let todo = document.getElementById('todo')
-
         let wrapper = document.getElementById('todo-wrapper')
         // Create DOM
         let div = document.createElement('div')
         div.classList.add("todo-task")
+
         let li = document.createElement('li')
 
         let label = document.createElement('label')
 
         let input = document.createElement('input')
+        input.id = task.id
         input.type = "checkbox"
         input.name = ""
-        input.checked = task.statusId === 4 ? undefined : "checked"
-
-        let idHidden = document.createElement('input')
-        idHidden.type = "hidden"
-        idHidden.name = "id" + task.id
-        idHidden.value = task.id
+        input.checked = task.statusId === 4 
+        input.addEventListener("click", updateFunc)
+        input.param = task
 
         let p = document.createElement('p')
         p.appendChild(document.createTextNode(task.content))
@@ -65,13 +66,12 @@ function addDomTask(task) {
 
         div.appendChild(li)
 
-        todo.appendChild(div)
-
-        // let firstTask = document.querySelector('.todo-task')
-        // todo.insertBefore(div, firstTask)
-
         wrapper.appendChild(div)
     }
+}
+
+function updateFunc(evt) {
+    updateTask(evt.currentTarget.param)
 }
 
 /**
@@ -102,8 +102,21 @@ function changeDate() {
     }).catch(e => console.error(e))
 }
 
-function updateTask(task) {
-    console.error("update", task)
+function updateTask(id) {
+    callModal()
+    let checkbox = document.getElementById(id)
+
+    let url = checkbox.checked ? '/task-service/done-task' : '/task-service/open-task'
+
+    let params = {
+        id: id
+    }
+
+    // Get Request
+    axios.get(url, {params}).then(res => {
+        console.error(res)
+        hideModal()
+    }).catch(e => console.error(e))
 }
 
 /**
@@ -115,8 +128,6 @@ function callModal(content) {
 
     let p = document.getElementById('p-modal-content')
     p.innerText = content ? content : 'Please wait a moment ...'
-
-    // setTimeout(hideModal, 1000)
 }
 
 /**

@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import tuanlm.fpt.web.todo.entity.Task;
+import tuanlm.fpt.web.todo.request.TaskRequest;
 import tuanlm.fpt.web.todo.service.TaskService;
 import tuanlm.fpt.web.todo.utils.AppConstants;
 import tuanlm.fpt.web.todo.utils.DateUtils;
@@ -42,7 +43,7 @@ public class TaskRestController {
 		this.taskService = taskService;
 	}
 	
-	@GetMapping(value = "get-list-task-by-day", produces = MediaType.APPLICATION_JSON_VALUE)
+	@GetMapping(value = "/get-list-task-by-day", produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<List<Task>> getTaskListByDate(@RequestParam String date, Principal principal) {
 		if (principal == null) {
 			return new ResponseEntity<List<Task>>(HttpStatus.FORBIDDEN);
@@ -70,11 +71,11 @@ public class TaskRestController {
 	 * @return the response entity
 	 */
 	@PostMapping(value = "/create-new-task", produces = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<Integer> createTask (@RequestBody @Valid Task task, Principal principal) {
+	public ResponseEntity<Task> createTask (@RequestBody @Valid TaskRequest task, Principal principal) {
 		if (principal == null) {
-			return new ResponseEntity<Integer>(HttpStatus.FORBIDDEN);
+			return new ResponseEntity<Task>(HttpStatus.FORBIDDEN);
 		}
-		return new ResponseEntity<Integer>(taskService.addTask(principal.getName(), task.getContent()) , HttpStatus.OK);
+		return new ResponseEntity<Task>(taskService.addTask(principal.getName(), task) , HttpStatus.OK);
 	}
 	
 	/**
@@ -84,7 +85,7 @@ public class TaskRestController {
 	 * @param principal the principal
 	 * @return the response entity
 	 */
-	@GetMapping(value = "done-task", produces = MediaType.APPLICATION_JSON_VALUE)
+	@GetMapping(value = "/done-task", produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<Void> doneTask (@RequestParam int id, Principal principal) {
 		if (principal == null) {
 			return new ResponseEntity<Void>(HttpStatus.FORBIDDEN);
@@ -101,7 +102,7 @@ public class TaskRestController {
 	 * @param principal the principal
 	 * @return the response entity
 	 */
-	@GetMapping(value = "open-task", produces = MediaType.APPLICATION_JSON_VALUE)
+	@GetMapping(value = "/open-task", produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<Void> openTask (@RequestParam int id, Principal principal) {
 		if (principal == null) {
 			return new ResponseEntity<Void>(HttpStatus.FORBIDDEN);

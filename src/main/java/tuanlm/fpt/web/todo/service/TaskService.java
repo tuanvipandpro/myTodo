@@ -4,7 +4,9 @@ import java.util.Date;
 import java.util.List;
 
 import tuanlm.fpt.web.todo.entity.Task;
+import tuanlm.fpt.web.todo.request.TaskRequest;
 
+// TODO: Auto-generated Javadoc
 /**
  * The Interface TaskService.
  */
@@ -19,19 +21,21 @@ public interface TaskService {
 	 */
 	List<Task> getTaskByUsernameAndDate(String username, Date date);
 	
+
 	/**
 	 * Adds the task.
 	 *
 	 * @param username the username
-	 * @param content the content
-	 * @return the integer
+	 * @param task the task
+	 * @return the task
 	 */
-	Integer addTask(String username, String content);
+	Task addTask(String username, TaskRequest task);
 	
 	/**
 	 * Done task.
 	 *
 	 * @param id the id
+	 * @param status the status
 	 * @return true, if successful
 	 */
 	boolean updateTask(int id, int status);
