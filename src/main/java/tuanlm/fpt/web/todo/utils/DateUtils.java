@@ -10,7 +10,7 @@ import java.util.Date;
 public class DateUtils {
 	public static Date DateConvert(String dateString, String format) throws ParseException {
 		// Check null or empty
-		if (dateString.isBlank() || dateString == null) {
+		if (dateString.equals("") || dateString == null) {
 			return null;
 		}
 		
