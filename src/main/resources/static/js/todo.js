@@ -48,10 +48,11 @@ function addDomTask(task) {
         let input = document.createElement('input')
         input.id = task.id
         input.type = "checkbox"
-        input.name = ""
-        input.checked = task.statusId === 4 
-        input.addEventListener("click", updateFunc)
-        input.param = task
+        input.name = "status"
+        input.checked = task.statusId === 5 
+		input.onclick = function(){
+			updateTask(task.id)
+		}
 
         let p = document.createElement('p')
         p.appendChild(document.createTextNode(task.content))
@@ -68,10 +69,6 @@ function addDomTask(task) {
 
         wrapper.appendChild(div)
     }
-}
-
-function updateFunc(evt) {
-    updateTask(evt.currentTarget.param)
 }
 
 /**
@@ -102,9 +99,13 @@ function changeDate() {
     }).catch(e => console.error(e))
 }
 
+/**
+ * Update Task Status 
+ */
 function updateTask(id) {
     callModal()
     let checkbox = document.getElementById(id)
+
 
     let url = checkbox.checked ? '/task-service/done-task' : '/task-service/open-task'
 
@@ -114,7 +115,6 @@ function updateTask(id) {
 
     // Get Request
     axios.get(url, {params}).then(res => {
-        console.error(res)
         hideModal()
     }).catch(e => console.error(e))
 }
