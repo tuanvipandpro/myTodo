@@ -45,10 +45,6 @@ public class TaskRestController {
 	
 	@GetMapping(value = "/get-list-task-by-day", produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<List<Task>> getTaskListByDate(@RequestParam String date, Principal principal) {
-		if (principal == null) {
-			return new ResponseEntity<List<Task>>(HttpStatus.FORBIDDEN);
-		}	
-		
 		try {
 			Date dateConverted = DateUtils.DateConvert(date, "yyyy-MM-dd");
 			if (dateConverted != null) {
@@ -72,9 +68,6 @@ public class TaskRestController {
 	 */
 	@PostMapping(value = "/create-new-task", produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<Task> createTask (@RequestBody @Valid TaskRequest task, Principal principal) {
-		if (principal == null) {
-			return new ResponseEntity<Task>(HttpStatus.FORBIDDEN);
-		}
 		return new ResponseEntity<Task>(taskService.addTask(principal.getName(), task) , HttpStatus.OK);
 	}
 	
@@ -86,10 +79,7 @@ public class TaskRestController {
 	 * @return the response entity
 	 */
 	@GetMapping(value = "/done-task", produces = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<Void> doneTask (@RequestParam int id, Principal principal) {
-		if (principal == null) {
-			return new ResponseEntity<Void>(HttpStatus.FORBIDDEN);
-		}		
+	public ResponseEntity<Void> doneTask (@RequestParam int id, Principal principal) {	
 		return taskService.updateTask(id, AppConstants.DONE_STATUS) ? 
 				new ResponseEntity<Void> (HttpStatus.OK) : 
 				new ResponseEntity<Void>(HttpStatus.INTERNAL_SERVER_ERROR);
@@ -103,10 +93,7 @@ public class TaskRestController {
 	 * @return the response entity
 	 */
 	@GetMapping(value = "/open-task", produces = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<Void> openTask (@RequestParam int id, Principal principal) {
-		if (principal == null) {
-			return new ResponseEntity<Void>(HttpStatus.FORBIDDEN);
-		}		
+	public ResponseEntity<Void> openTask (@RequestParam int id, Principal principal) {	
 		return taskService.updateTask(id, AppConstants.OPEN_STATUS) ? 
 				new ResponseEntity<Void> (HttpStatus.OK) : 
 				new ResponseEntity<Void>(HttpStatus.INTERNAL_SERVER_ERROR);

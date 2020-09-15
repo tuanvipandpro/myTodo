@@ -54,6 +54,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 		http.authorizeRequests().antMatchers("/", "/login", "logout").permitAll();
 		// Login with ROLE_MEMBER
 		http.authorizeRequests().antMatchers("/home").access("hasRole('ROLE_MEMBER')");
+		http.authorizeRequests().antMatchers("/account/**").access("hasRole('ROLE_MEMBER')");
+		http.authorizeRequests().antMatchers("/task-service/**").access("hasRole('ROLE_MEMBER')");
 		// Login with ROLE_ADMIN
 		http.authorizeRequests().antMatchers("/admin").access("hasRole('ROLE_ADMIN')");
 		// Config Forbidden
